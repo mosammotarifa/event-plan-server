@@ -24,6 +24,7 @@ const run = async () => {
     const servicesCollection = db.collection("services");
     const WhyChooseUsCollection = db.collection("reasons");
     const testimonialsCollection = db.collection("testimonials");
+    const howweworkCollection = db.collection("howwework");
     app.get("/achievements", async (req, res) => {
       try {
         const cursor = achievementsCollection.find();
@@ -67,6 +68,17 @@ const run = async () => {
     app.get("/testimonials", async (req, res) => {
       try {
         const cursor = testimonialsCollection.find();
+        const result = await cursor.toArray();
+        res.send(result);
+      } catch (error) {
+        res
+          .status(200)
+          .send({ message: "failed to fetched the services data" });
+      }
+    });
+    app.get("/howwework", async (req, res) => {
+      try {
+        const cursor = howweworkCollection.find();
         const result = await cursor.toArray();
         res.send(result);
       } catch (error) {
